@@ -10,7 +10,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
     const messageDiv = document.getElementById('message');
 
     // Apps ScriptのURL
-    const gasUrl = 'https://script.google.com/macros/s/AKfycbwUmCeZtA0Re5RawYrl17tjJ1Yau2_yy5i6ImKl4oqmJUwUMe9gQ1OVpXRd_yOZ1Vd_bg/exec';
+    const gasUrl = 'https://script.google.com/macros/s/AKfycbyj5tSllo0bweVgdDXBhjb73fpN_XDpTvYgESvhpjmU-Bf0uZBMoqHUPs4hA2GDJOWT7Q/exec';
 
     // フォームデータを準備
     const formData = new FormData();
