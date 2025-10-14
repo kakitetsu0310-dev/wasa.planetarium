@@ -28,7 +28,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
         if (!response.ok) {
             throw new Error('ネットワークエラー');
         }
-        return response.text();
+        return response.json(); // .text()から.json()に変更
     })
     .then(data => {
         // 成功メッセージの表示
