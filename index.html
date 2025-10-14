@@ -3,52 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAS連携テストサイト</title>
-    <style>
-        body { font-family: sans-serif; margin: 2em; }
-        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
-        input[type="text"] { width: 100%; padding: 8px; box-sizing: border-box; margin-bottom: 10px; }
-        button { padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        #response { margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9; }
-    </style>
+    <title>プラネタリウム予約フォーム</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h1>GAS連携テスト</h1>
-    <p>以下にテキストを入力し、送信ボタンを押してください。</p>
-    <input type="text" id="inputText" placeholder="ここにテキストを入力...">
-    <button id="sendButton">送信</button>
-    
-    <div id="response">
-        <p>ここにGASからの応答が表示されます。</p>
-    </div>
+    <header>
+        <h1>予約フォーム</h1>
+    </header>
+
+    <main>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">お名前 (ニックネーム可):</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="people">人数 (大人・子供合計):</label>
+                <input type="number" id="people" name="people" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="time">希望時間:</label>
+                <select id="time" name="time" required>
+                    <option value="">-- 選択してください --</option>
+                    <option value="10:00~10:30 上映回">10:00~10:30 上映回</option>
+                    <option value="13:00~13:30 上映回">13:00~13:30 上映回</option>
+                    <option value="15:00~15:30 上映回">15:00~15:30 上映回</option>
+                    <option value="17:00~17:30 上映回">17:00~17:30 上映回</option>
+                </select>
+            </div>
+            <button type="submit">予約する</button>
+        </form>
+
+        <div id="message" class="message hidden"></div>
+    </main>
 </div>
 
-<script>
-document.getElementById('sendButton').addEventListener('click', function() {
-    const inputText = document.getElementById('inputText').value;
-    const responseDiv = document.getElementById('response');
-    
-    // ここにあなたのGoogle Apps ScriptのURLを貼り付けてください
-    const gasUrl = 'https://script.google.com/macros/s/AKfycbxEGt7BSNWuv0sCH8PQ4tqTlTNguVrbeBHHLR9RlbEpUENLF0xeufTzsjq9iMDpX7Gp/exec
-';
-    
-    // リクエストを送信
-    fetch(gasUrl, {
-        method: 'POST',
-        body: new URLSearchParams({ 'data': inputText })
-    })
-    .then(response => response.json())
-    .then(data => {
-        responseDiv.innerHTML = `<p><strong>成功しました！</strong></p><p>GASからの応答: ${data.message}</p>`;
-    })
-    .catch(error => {
-        responseDiv.innerHTML = `<p><strong>エラーが発生しました。</strong></p><p>エラー詳細: ${error.message}</p>`;
-        console.error('Error:', error);
-    });
-});
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
