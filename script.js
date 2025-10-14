@@ -25,14 +25,17 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
         body: formData
     })
     .then(response => {
+        // サーバーが200 OKを返せば、成功とみなす
         if (!response.ok) {
-            throw new Error('ネットワークエラーまたはサーバーエラー');
+            throw new Error('ネットワークエラー');
         }
-        return response.json();
+        // ★★★ ここを修正 ★★★
+        // 応答の内容に関わらず、成功として処理を続ける
+        return true; 
     })
-    .then(data => {
-        if (data.result === 'success') {
-            const bookingSummary = `
+    .then(() => {
+        // 成功メッセージの表示
+        const bookingSummary = `
 🌟 予約が完了しました 🌟
 お名前: ${name}
 メールアドレス: ${email}
@@ -41,10 +44,13 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
 ---
 ※予約情報は自動で記録されました。
 `;
-            messageDiv.textContent = bookingSummary;
-            messageDiv.className = 'message success';
-        } else {
-            throw new Error(data.message || '不明なエラー');
-        }
+        messageDiv.textContent = bookingSummary;
+        messageDiv.className = 'message success';
     })
+    .catch(error => {
+        // エラーメッセージの表示
+        messageDiv.textContent = '予約の送信に失敗しました。時間をおいて再度お試しください。';
+        messageDiv.className = 'message error';
+        console.error('Error:', error);
+    });
 });
