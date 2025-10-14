@@ -47,9 +47,4 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
             throw new Error(data.message || '不明なエラー');
         }
     })
-    .catch(error => {
-        messageDiv.textContent = '予約の送信に失敗しました。時間をおいて再度お試しください。';
-        messageDiv.className = 'message error';
-        console.error('Error:', error);
-    });
 });
