@@ -7,7 +7,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
   const time = document.getElementById('time').value;
   const messageDiv = document.getElementById('message');
 
-  const gasUrl = 'https://script.google.com/macros/s/AKfycbxFIFafy5TTXLQcwNbxzkuFy3dAfWm7JY7Bs1VlkH5szGuNoMopPGAzjRjKu6P9kbkV/exec';
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbwJxiE_LZ8-cszNgMF9n5OBKGHJioMKSodwlUdmiGBAjCgklsnOgDwh515UeYvviQqB/exec';
 
   const payload = { name, email, people, time };
 
