@@ -10,7 +10,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
     const messageDiv = document.getElementById('message');
 
     // ★★★ あなたのGoogle Apps ScriptのURLを貼り付けます ★★★
-    const gasUrl = 'https://script.google.com/macros/s/AKfycbzsLm2KAVdusjgQupoRDM4WWPs48ti38eBvI7aLhTtlGRPq5PNFwSsPb1V5U087IURD/exec';
+    const gasUrl = 'https://script.google.com/macros/s/AKfycbwhHbMbzGY4l_C-fsTF3MLjfTR44ro7Q5pytyFr8m8RpMtmmxD0riJ-fDdw5XsVguWM/exec';
 
     // フォームデータをJSON形式に変換
     const payload = {
