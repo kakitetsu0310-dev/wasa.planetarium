@@ -39,7 +39,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
 お名前: ${name}
 メールアドレス: ${email}
 人数: ${people}名
-希望時間: ${time}～ 上映回
+希望時間: ${time}
 ---
 ※予約情報は自動で記録されました。
 
