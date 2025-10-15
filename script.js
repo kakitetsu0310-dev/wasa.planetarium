@@ -27,14 +27,14 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
     .then(() => {
         // 成功メッセージの表示
         const bookingSummary = `
-🌟 予約が完了しました 🌟
-お名前: ${name}
-メールアドレス: ${email}
-人数: ${people}名
-希望時間: ${time}
----
-※予約情報は自動で記録されました。
-`;
+        🌟 予約が完了しました 🌟
+        お名前: ${name}
+        メールアドレス: ${email}
+        人数: ${people}名
+        希望時間: ${time}
+        ---
+        ※予約情報は自動で記録されました。
+        `;
         messageDiv.textContent = bookingSummary;
         messageDiv.className = 'message success';
     })
