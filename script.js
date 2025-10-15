@@ -20,16 +20,16 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
     formData.append('time', time);
 
     const bookingSummary = `
-🌟 予約が完了しました 🌟
-お名前: ${name}
-メールアドレス: ${email}
-人数: ${people}名
-希望時間: ${time}
----
-※予約情報は自動で記録されました。
-
-メモを取るかスクリーンショットを撮ってください。
-`;
+    🌟 予約が完了しました 🌟
+    お名前: ${name}
+    メールアドレス: ${email}
+    人数: ${people}名
+    希望時間: ${time}
+    ---
+    ※予約情報は自動で記録されました。
+    
+    メモを取るかスクリーンショットを撮ってください。
+    `;
     messageDiv.textContent = bookingSummary;
     messageDiv.className = 'message success';
 
