@@ -25,12 +25,14 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
         body: formData
     })
     .then(response => {
+        console.log('受け取った応答:', response);
         if (!response.ok) {
             throw new Error('サーバーエラーが発生しました。');
         }
         return response.json(); // 応答をJSONとして解析
     })
     .then(data => {
+        console.log('JSONデータ:', data);
         // Apps Scriptからの応答内容をチェック
         if (data.result === 'success') {
             // 成功メッセージの表示
