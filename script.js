@@ -24,14 +24,6 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
         method: 'POST',
         body: formData
     })
-    .then(response => {
-    // サーバーが200 OKを返せば、成功とみなす
-    if (!response.ok) {
-        throw new Error('ネットワークエラー');
-    }
-    // JSON解析をスキップし、次のthenブロックへ進む
-    return true; 
-　　})
     .then(() => {
         // 成功メッセージの表示
         const bookingSummary = `
