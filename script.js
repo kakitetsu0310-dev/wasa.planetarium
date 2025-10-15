@@ -19,37 +19,38 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
     formData.append('people', people);
     formData.append('time', time);
 
+    const bookingSummary = `
+🌟 予約が完了しました 🌟
+お名前: ${name}
+メールアドレス: ${email}
+人数: ${people}名
+希望時間: ${time}
+---
+※予約情報は自動で記録されました。
+
+メモを取るかスクリーンショットを撮ってください。
+`;
+    messageDiv.textContent = bookingSummary;
+    messageDiv.className = 'message success';
+
     // Apps Scriptにデータを送信
     fetch(gasUrl, {
         method: 'POST',
         body: formData
     })
     .then(response => {
-        // HTTPステータスが200 OKであれば、成功とみなす
+        // HTTPステータスが200 OKでない場合、エラーをコンソールに表示
         if (!response.ok) {
-            throw new Error('ネットワークエラー');
+            console.error('サーバーへの送信中にエラーが発生しました。', response.statusText);
         }
-        // ★修正点：JSON解析をスキップし、次のthenブロックへ進む
-        return true; 
+        return response.text();
     })
-    .then(() => {
-        // 成功メッセージの表示
-        const bookingSummary = `
-        🌟 予約が完了しました 🌟
-        お名前: ${name}
-        メールアドレス: ${email}
-        人数: ${people}名
-        希望時間: ${time}
-        ---
-        ※予約情報は自動で記録されました。
-        `;
-        messageDiv.textContent = bookingSummary;
-        messageDiv.className = 'message success';
+    .then(data => {
+        // サーバーからの応答内容をコンソールに表示
+        console.log('サーバーからの応答:', data);
     })
     .catch(error => {
-        // エラーメッセージの表示
-        messageDiv.textContent = '予約の送信に失敗しました。時間をおいて再度お試しください。';
-        messageDiv.className = 'message error';
-        console.error('Error:', error);
+        // ネットワークエラーなどが発生した場合、コンソールにログを記録
+        console.error('予約データの送信に失敗しました:', error);
     });
 });
