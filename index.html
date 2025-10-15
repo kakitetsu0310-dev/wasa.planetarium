@@ -1,35 +1,60 @@
-<form id="bookingForm">
-    <div class="form-group">
-        <label for="name">お名前 (ニックネーム可):</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-        <label for="email">LINEのお名前:</label>
-        <input type="text" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label for="people">人数 (大人・子供合計):</label>
-        <input type="number" id="people" name="people" min="1" max="8" required>
-    </div>
-    <div class="form-group">
-        <label for="time">希望時間:</label>
-        <select id="time" name="time" required>
-            <option value="">-- 選択してください --</option>
-            <option value="10:00~10:30 上映回">10:00~10:30 上映回</option>
-            <option value="10:30~11:00 上映回">10:30~11:00 上映回</option>
-            <option value="11:00~11:30 上映回">11:00~11:30 上映回</option>
-            <option value="11:30~12:00 上映回">11:30~12:00 上映回</option>
-            <option value="12:00~12:30 上映回">12:00~12:30 上映回</option>
-            <option value="12:30~13:00 上映回">12:30~13:00 上映回</option>
-            <option value="13:00~13:30 上映回">13:00~13:30 上映回</option>
-            <option value="13:30~14:00 上映回">13:30~14:00 上映回</option>
-            <option value="14:00~14:30 上映回">14:00~14:30 上映回</option>
-            <option value="14:30~15:00 上映回">14:30~15:00 上映回</option>
-            <option value="15:00~15:30 上映回">15:00~15:30 上映回</option>
-            <option value="15:30~16:00 上映回">15:30~16:00 上映回</option>
-            <option value="16:00~16:30 上映回">16:00~16:30 上映回</option>
-            <option value="16:30~17:00 上映回">16:30~17:00 上映回</option>
-        </select>
-    </div>
-    <button type="submit">予約する</button>
-</form>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プラネタリウム予約フォーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>予約フォーム</h1>
+    </header>
+
+    <main>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">お名前 (ニックネーム可):</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">LINEのお名前:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="people">人数 (大人・子供合計):</label>
+                <input type="number" id="people" name="people" min="1" max="8" required>
+            </div>
+            <div class="form-group">
+                <label for="time">希望時間:</label>
+                <select id="time" name="time" required>
+                    <option value="">-- 選択してください --</option>
+                    <option value="10:00~10:30 上映回">10:00~10:30 上映回</option>
+                    <option value="10:30~11:00 上映回">10:30~11:00 上映回</option>
+                    <option value="11:00~11:30 上映回">11:00~11:30 上映回</option>
+                    <option value="11:30~12:00 上映回">11:30~12:00 上映回</option>
+                    <option value="12:00~12:30 上映回">12:00~12:30 上映回</option>
+                    <option value="12:30~13:00 上映回">12:30~13:00 上映回</option>
+                    <option value="13:00~13:30 上映回">13:00~13:30 上映回</option>
+                    <option value="13:30~14:00 上映回">13:30~14:00 上映回</option>
+                    <option value="14:00~14:30 上映回">14:00~14:30 上映回</option>
+                    <option value="14:30~15:00 上映回">14:30~15:00 上映回</option>
+                    <option value="15:00~15:30 上映回">15:00~15:30 上映回</option>
+                    <option value="15:30~16:00 上映回">15:30~16:00 上映回</option>
+                    <option value="16:00~16:30 上映回">16:00~16:30 上映回</option>
+                    <option value="16:30~17:00 上映回">16:30~17:00 上映回</option>
+                </select>
+            </div>
+            <button type="submit">予約する</button>
+        </form>
+
+        <div id="message" class="message hidden"></div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
