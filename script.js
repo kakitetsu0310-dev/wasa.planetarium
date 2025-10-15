@@ -24,6 +24,14 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
         method: 'POST',
         body: formData
     })
+    .then(response => {
+        // HTTPステータスが200 OKであれば、成功とみなす
+        if (!response.ok) {
+            throw new Error('ネットワークエラー');
+        }
+        // ★修正点：JSON解析をスキップし、次のthenブロックへ進む
+        return true; 
+    })
     .then(() => {
         // 成功メッセージの表示
         const bookingSummary = `
