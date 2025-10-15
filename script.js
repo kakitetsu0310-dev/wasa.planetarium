@@ -11,63 +11,57 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
 
     // ★★★ ここにあなたのGoogle Apps ScriptのURLを貼り付けます ★★★
     const gasUrl = 'https://script.google.com/macros/s/AKfycbzCSAP219hqYBEfmjqVoeUnEThPGrJYPBDk85l-IyL8PEp3bqZVQahtq8NOETam_3C5/exec';
-
-    // 予約内容の確認メッセージを準備
-    const bookingSummary = `
-🌟 予約が完了しました 🌟
-お名前: ${name}
-メールアドレス: ${email}
-人数: ${people}名
-希望時間: ${time}～ 上映回
----
-※予約情報はメモするか、スクリーンショットを保存してください。
-`;
     
-    // 1. ポップアップで即座に予約内容を表示
-    alert(bookingSummary);
-
-    // 2. 予約内容をHTMLに表示
-    messageDiv.innerHTML = `<pre>${bookingSummary}</pre><button onclick="copyToClipboard()">内容をコピー</button>`;
-    messageDiv.className = 'message success';
-    messageDiv.classList.remove('hidden');
-
-    // 3. フォームをリセット
-    this.reset();
-    
-    // 4. その後、Apps Scriptに非同期でデータを送信する
+    // フォームデータを準備
     const formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);
     formData.append('people', people);
     formData.append('time', time);
 
+    // Apps Scriptにデータを送信
     fetch(gasUrl, {
         method: 'POST',
         body: formData
     })
     .then(response => {
         if (!response.ok) {
-            console.error('サーバーへの送信中にエラーが発生しました。', response.statusText);
+            throw new Error('サーバーエラーが発生しました。');
         }
-        return response.text();
+        return response.json(); // 応答をJSONとして解析
     })
     .then(data => {
-        console.log('サーバーからの応答:', data);
+        // Apps Scriptからの応答内容をチェック
+        if (data.result === 'success') {
+            // 成功メッセージの表示
+            const bookingSummary = `
+🌟 予約が完了しました 🌟
+お名前: ${name}
+メールアドレス: ${email}
+人数: ${people}名
+希望時間: ${time}～ 上映回
+---
+※予約情報は自動で記録されました。
+
+メモを取るかスクリーンショットを撮ってください。
+`;
+            alert(bookingSummary);
+            messageDiv.innerHTML = `<pre>${bookingSummary}</pre><button onclick="copyToClipboard()">内容をコピー</button>`;
+            messageDiv.className = 'message success';
+            messageDiv.classList.remove('hidden');
+            this.reset();
+        } else if (data.result === 'error') {
+            // エラーメッセージの表示
+            messageDiv.textContent = data.message || '予約の送信に失敗しました。時間をおいて再度お試しください。';
+            messageDiv.className = 'message error';
+            messageDiv.classList.remove('hidden');
+        }
     })
     .catch(error => {
-        console.error('予約データの送信に失敗しました:', error);
+        // ネットワークエラーなどの表示
+        messageDiv.textContent = '通信エラーが発生しました。時間をおいて再度お試しください。';
+        messageDiv.className = 'message error';
+        messageDiv.classList.remove('hidden');
+        console.error('Error:', error);
     });
 });
-
-// 予約内容をクリップボードにコピーする関数
-function copyToClipboard() {
-    const messageDiv = document.getElementById('message');
-    const textToCopy = messageDiv.querySelector('pre').textContent;
-
-    navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('予約内容がクリップボードにコピーされました！');
-    }).catch(err => {
-        console.error('コピーに失敗しました', err);
-        alert('コピーに失敗しました。手動でコピーしてください。');
-    });
-}
