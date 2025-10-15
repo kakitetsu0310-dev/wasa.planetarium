@@ -9,20 +9,24 @@ document.getElementById('bookingForm').addEventListener('submit', function(event
 
     const messageDiv = document.getElementById('message');
 
-    // ★★★ ここにあなたのGoogle Apps ScriptのURLを貼り付けます ★★★
+    // ★★★ あなたのGoogle Apps ScriptのURLを貼り付けます ★★★
     const gasUrl = 'https://script.google.com/macros/s/AKfycbzsLm2KAVdusjgQupoRDM4WWPs48ti38eBvI7aLhTtlGRPq5PNFwSsPb1V5U087IURD/exec';
-    
-    // フォームデータを準備
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('people', people);
-    formData.append('time', time);
+
+    // フォームデータをJSON形式に変換
+    const payload = {
+        name: name,
+        email: email,
+        people: people,
+        time: time
+    };
 
     // Apps Scriptにデータを送信
     fetch(gasUrl, {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'text/plain'  // ★★★ ここにヘッダーを追加 ★★★
+        },
+        body: JSON.stringify(payload)  // ★★★ JSON形式の文字列を送信 ★★★
     })
     .then(response => {
         console.log('受け取った応答:', response);
